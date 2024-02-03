@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-poi
+spec:
+  selector:
+    matchLabels:
+      app: poi
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: poi
+    spec:
+      containers:
+      - image: "registryufe8262.azurecr.io/paoloceffa/poi"
+        name: my-poi-pod
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources:
+          limits:
+            cpu: "1"
+            memory: "512Mi"
+          requests:
+            cpu: "0.5"
+            memory: "256Mi"
+        env:
+        - name: "SQL_SERVER"
+          value: "sqlserverufe8262.database.windows.net"
+        - name: "SQL_USER"
+          value: "sqladminuFe8262"
+        - name: "SQL_DB_NAME"
+          value: "mydrivingDB"
+        - name: "ASPNETCORE_ENVIRONMENT"
+          value: "Production"
+        - name: "CONFIG_FILES_PATH"
+          value: "/secrets"
+        - name: "DOTNET_SYSTEM_GLOBALIZATION_INVARIANT"
+          value: "false"
+        - name: "WEB_SERVER_BASE_URI"
+          value: "http://0.0.0.0"
+        - name: "WEB_PORT"
+          value: "80"
+        - name: "SQL_PASSWORD"
+          value: "pG0ot9Zc1"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: poi
+  labels:
+    run: poi-svclabel
+spec:
+  selector:
+    app: poi
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+    name: poi
