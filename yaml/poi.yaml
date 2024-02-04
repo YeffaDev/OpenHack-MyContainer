@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-poi
+  name: poi
 spec:
   selector:
     matchLabels:
@@ -14,16 +14,16 @@ spec:
     spec:
       containers:
       - image: "registryufe8262.azurecr.io/paoloceffa/poi"
-        name: my-poi-pod
+        name: poi
         ports:
         - containerPort: 80
           protocol: TCP
         resources:
           limits:
-            cpu: "1"
-            memory: "512Mi"
+            cpu: "0.2"
+            memory: "256Mi"
           requests:
-            cpu: "0.5"
+            cpu: "0.2"
             memory: "256Mi"
         env:
         - name: "SQL_SERVER"

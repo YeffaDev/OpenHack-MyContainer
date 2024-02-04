@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tripviewer
+  labels:
+    app: tripviewer
+spec:
+  selector:
+    matchLabels:
+      app: tripviewer
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tripviewer
+    spec:
+      containers:
+      - image: "registryufe8262.azurecr.io/paoloceffa/tripviewer"
+        name: tripviewer
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources:
+          limits:
+            cpu: "0.2"
+            memory: "256Mi"
+          requests:
+            cpu: "0.2"
+            memory: "256Mi"
+        env:
+        - name: "TRIPS_API_ENDPOINT"
+          value: "http://trips-service/api/trips"
+        - name: "USERPROFILE_API_ENDPOINT"
+          value: "http://userprofile-service/api/user"
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: tripviewer
+spec:
+  selector:
+    app: tripviewer
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+    
