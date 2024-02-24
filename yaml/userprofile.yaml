@@ -22,22 +22,22 @@ spec:
           protocol: TCP
         resources:
           limits:
-            cpu: "0.2"
+            cpu: "0.15"
             memory: "256Mi"
           requests:
-            cpu: "0.2"
+            cpu: "0.15"
             memory: "256Mi"
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: userprofile
+  name: userprofile-service
 spec:
   selector:
     app: userprofile
   ports:
-  - name: userprofile
+  - name: userprofile-http
     protocol: TCP
     port: 80
     targetPort: 80

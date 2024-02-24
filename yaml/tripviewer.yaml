@@ -22,10 +22,10 @@ spec:
           protocol: TCP
         resources:
           limits:
-            cpu: "0.2"
+            cpu: "0.15"
             memory: "256Mi"
           requests:
-            cpu: "0.2"
+            cpu: "0.1"
             memory: "256Mi"
         env:
         - name: "TRIPS_API_ENDPOINT"
@@ -37,12 +37,16 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: tripviewer
+  name: tripviewer-service
 spec:
   selector:
     app: tripviewer
   ports:
-  - protocol: TCP
+  - name: tripviewer-http 
+    protocol: TCP
     port: 80
     targetPort: 80
-    
+
+
+---
+

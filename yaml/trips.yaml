@@ -3,12 +3,12 @@ kind: Deployment
 metadata:
   name: trips
   labels:
-    app: trips
+    deploy: trips
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: trips
-  replicas: 1
   template:
     metadata:
       labels:
@@ -16,48 +16,53 @@ spec:
     spec:
       containers:
       - image: "registryufe8262.azurecr.io/paoloceffa/trips"
+        imagePullPolicy: Always
         name: trips
+        livenessProbe:
+          httpGet:
+            path: /api/trips/healthcheck
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /api/trips/healthcheck
+            port: 80
+          initialDelaySeconds: 5
         ports:
-        - containerPort: 80
-          protocol: TCP
+          - containerPort: 80
+            name: http
+            protocol: TCP
+          - containerPort: 443
+            name: https
+            protocol: TCP
         resources:
           limits:
-            cpu: "0.2"
+            cpu: "0.15"
             memory: "256Mi"
           requests:
-            cpu: "0.2"
+            cpu: "0.1"
             memory: "256Mi"
         env:
-        - name: "CONFIG_FILES_PATH"
-          value: "/secrets"
-        - name: "SQL_USER"
-          value: "sqladminuFe8262"
-        - name: "SQL_PASSWORD"
-          value: "pG0ot9Zc1"
-        - name: "SQL_SERVER"
-          value: "sqlserverufe8262.database.windows.net"
-        - name: "SQL_DB_NAME"
-          value: "mydrivingDB"
-        - name: "SQL_DBNAME"
-          value: "mydrivingDB"
-        - name: "OPENAPI_DOCS_URI"
-          value: "http://0.0.0.0"
-        - name: "DEBUG_LOGGING"
-          value: "false"
-        
-
-
+          - name: PORT
+            value: '80'
+          - name: OPENAPI_DOCS_URI
+            value: 'http://localhost'
+          - name: DEBUG_LOGGING
+            value: 'true'
+        envFrom:
+        - secretRef:
+            name: sql
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
-  name: trips
+  name: trips-service
 spec:
   selector:
     app: trips
   ports:
-  - name: trips
-    protocol: TCP
-    port: 80
-    targetPort: 80
+    - name: trips-http
+      protocol: TCP
+      port: 80
+      targetPort: 80

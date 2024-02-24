@@ -22,22 +22,25 @@ spec:
           protocol: TCP
         resources:
           limits:
-            cpu: "0.2"
-            memory: "256Mi"
+            cpu: "0.5"
+            memory: "512Mi"
           requests:
-            cpu: "0.2"
-            memory: "256Mi"
+            cpu: "0.5"
+            memory: "512Mi"
+        envFrom:
+        - secretRef:
+            name: sql
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: user-java
+  name: user-java-service
 spec:
   selector:
     app: user-java
   ports:
-  - name: user-java
+  - name: user-java-http
     protocol: TCP
     port: 80
     targetPort: 80
