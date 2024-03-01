@@ -62,8 +62,8 @@ sqlpass=pG0ot9Zc1
 sqldb=mydrivingDB
 
 #Registry variables (echo)
-echo registryName=$registryName;echo registryLoginServer=registryLoginServer;echo registryPassword=$registryPassword
+echo registryName=$registryName;echo registryLoginServer=$registryLoginServer;echo registryPassword=$registryPassword
 registryName=registryymi6049
-registryLoginServer=registryLoginServer
+registryLoginServer=registryymi6049.azurecr.io
 registryPassword=UT8jRuyt34otXkxr8x1ThHSHTDaJ/Db52AbKfgKpxD+ACRBSVchE
 
