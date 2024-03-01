@@ -15,7 +15,7 @@ az account show
     "id": "wwww-wwww-wwww-wwww-wwwww",
     "isDefault": true,
     "managedByTenants": [],
-    "name": "Visual Studio Professional Avanade Paolo",
+    "name": "Visual Studio Professional Avanade rrrrrrrrr",
     "state": "Enabled",
     "tenantId": "qqqqq-qqqqq-qqqqq-qqqqq-qqqqqqqqq",
     "user": {
