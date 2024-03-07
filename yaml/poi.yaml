@@ -13,25 +13,22 @@ spec:
         app: poi
     spec:
       containers:
-      - image: "registryufe8262.azurecr.io/paoloceffa/poi"
+      - image: "registryymi6049.azurecr.io/paoloceffa/poi:1.0"
         name: poi
         ports:
         - containerPort: 80
           protocol: TCP
         resources:
           limits:
-            cpu: "0.15"
+            cpu: "0.2"
             memory: "256Mi"
           requests:
-            cpu: "0.15"
+            cpu: "0.2"
             memory: "256Mi"
+        envFrom:
+        - secretRef:
+            name: sql
         env:
-        - name: "SQL_SERVER"
-          value: "sqlserverufe8262.database.windows.net"
-        - name: "SQL_USER"
-          value: "sqladminuFe8262"
-        - name: "SQL_DB_NAME"
-          value: "mydrivingDB"
         - name: "ASPNETCORE_ENVIRONMENT"
           value: "Production"
         - name: "CONFIG_FILES_PATH"
@@ -42,8 +39,6 @@ spec:
           value: "http://0.0.0.0"
         - name: "WEB_PORT"
           value: "80"
-        - name: "SQL_PASSWORD"
-          value: "pG0ot9Zc1"
 
 ---
 

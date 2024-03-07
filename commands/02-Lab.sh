@@ -3,23 +3,6 @@ az login --tenant 9208f13d-c8b7-455e-81c5-27dd5f363a02 --use-device-code
 az account set --subscription 2474e5ce-b2a1-43af-985f-87fd2029012b
 az account show
 
-[
-  {
-    "cloudName": "AzureCloud",
-    "homeTenantId": "9208f13d-c8b7-455e-81c5-27dd5f363a02",
-    "id": "2474e5ce-b2a1-43af-985f-87fd2029012b",
-    "isDefault": true,
-    "managedByTenants": [],
-    "name": "Visual Studio Professional Avanade Paolo",
-    "state": "Enabled",
-    "tenantId": "9208f13d-c8b7-455e-81c5-27dd5f363a02",
-    "user": {
-      "name": "paolo.ceffa@avanade.com",
-      "type": "user"
-    }
-  }
-]
-
 #Fork Microsoft repo to your github
 #Clone from your repo
 mkdir ~/Openhack
@@ -46,7 +29,7 @@ az vm stop --name $vm --resource-group $teamRG
 #SQL variables
 sqlfqdn=sqlserver$random.database.windows.net
 sqluser=sqladmin$random
-sqlpass=pG0ot9Zc1
+sqlpass=
 sqldb=mydrivingDB
 
 #Registry variables
@@ -58,12 +41,12 @@ registryPassword="$(az acr credential show -n $registryName -g $teamRG --query '
 echo sqlfqdn=$sqlfqdn;echo sqluser=$sqluser;echo sqlpass=$sqlpass;echo sqldb=$sqldb
 sqlfqdn=sqlserverymi6049.database.windows.net
 sqluser=sqladminymi6049
-sqlpass=pG0ot9Zc1
+sqlpass=
 sqldb=mydrivingDB
 
 #Registry variables (echo)
 echo registryName=$registryName;echo registryLoginServer=$registryLoginServer;echo registryPassword=$registryPassword
 registryName=registryymi6049
 registryLoginServer=registryymi6049.azurecr.io
-registryPassword=UT8jRuyt34otXkxr8x1ThHSHTDaJ/Db52AbKfgKpxD+ACRBSVchE
+registryPassword=
 

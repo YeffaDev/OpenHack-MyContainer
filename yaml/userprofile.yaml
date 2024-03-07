@@ -15,18 +15,21 @@ spec:
         app: userprofile
     spec:
       containers:
-      - image: "registryufe8262.azurecr.io/paoloceffa/userprofile"
+      - image: "registryymi6049.azurecr.io/paoloceffa/userprofile:1.0"
         name: userprofile
         ports:
         - containerPort: 80
           protocol: TCP
         resources:
           limits:
-            cpu: "0.15"
+            cpu: "0.2"
             memory: "256Mi"
           requests:
-            cpu: "0.15"
+            cpu: "0.2"
             memory: "256Mi"
+        envFrom:
+        - secretRef:
+            name: sql
 ---
 
 apiVersion: v1

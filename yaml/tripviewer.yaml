@@ -15,17 +15,17 @@ spec:
         app: tripviewer
     spec:
       containers:
-      - image: "registryufe8262.azurecr.io/paoloceffa/tripviewer"
+      - image: "registryymi6049.azurecr.io/paoloceffa/tripviewer:1.0"
         name: tripviewer
         ports:
         - containerPort: 80
           protocol: TCP
         resources:
           limits:
-            cpu: "0.15"
+            cpu: "0.2"
             memory: "256Mi"
           requests:
-            cpu: "0.1"
+            cpu: "0.2"
             memory: "256Mi"
         env:
         - name: "TRIPS_API_ENDPOINT"

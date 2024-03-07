@@ -44,6 +44,19 @@ az acr repository list --name $registryName --output table
 az acr repository show --name $registryName --repository paoloceffa/poi --output table
 az acr repository show-tags --name $registryName --repository paoloceffa/poi --output table
 
+#TRIPS source var (GO)
+#pay attention to the credential_method : must be user/password
+var (
+    debug             = flag.Bool("debug", false, "enable debugging")
+    password          = flag.String("password", getConfigValue("SQL_PASSWORD", "changeme"), "the database password")
+    user              = flag.String("user", getConfigValue("SQL_USER", "sqladmin"), "the database user")
+    port              = flag.Int("port", 1433, "the database port")
+    server            = flag.String("server", getConfigValue("SQL_SERVER", "changeme.database.windows.net"), "the database server")
+    database          = flag.String("d", getConfigValue("SQL_DBNAME", "mydrivingDB"), "db_name")
+    credential_method = flag.String("c", getConfigValue("CREDENTIAL_METHOD", "username_and_password"), "method of authenticating into SQL DB")
+    clientId          = flag.String("i", getConfigValue("IDENTITY_CLIENT_ID", ""), "the  identity client id")
+)
+
 #Build and push Trips (API)
 cd  ~/OpenHack/OpenHack-MyContainer/src/trips 
 #read README

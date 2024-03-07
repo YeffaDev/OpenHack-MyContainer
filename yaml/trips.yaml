@@ -15,7 +15,7 @@ spec:
         app: trips
     spec:
       containers:
-      - image: "registryufe8262.azurecr.io/paoloceffa/trips"
+      - image: "registryymi6049.azurecr.io/paoloceffa/trips:1.0"
         imagePullPolicy: Always
         name: trips
         livenessProbe:
@@ -38,10 +38,10 @@ spec:
             protocol: TCP
         resources:
           limits:
-            cpu: "0.15"
+            cpu: "0.2"
             memory: "256Mi"
           requests:
-            cpu: "0.1"
+            cpu: "0.2"
             memory: "256Mi"
         env:
           - name: PORT
