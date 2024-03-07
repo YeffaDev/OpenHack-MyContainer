@@ -1,3 +1,55 @@
+#Azure login
+az login --tenant 9208f13d-c8b7-455e-81c5-27dd5f363a02 --use-device-code
+az account set --subscription 2474e5ce-b2a1-43af-985f-87fd2029012b
+az account show
+
+#Fork Microsoft repo to your github
+#Clone from your repo
+mkdir ~/Openhack
+cd ~/Openhack
+git clone https://github.com/YeffaDev/OpenHack-Microsoft.git
+#The deployment script expects to be run from the byos/containers/deploy directory. Scripts use relative paths based on that expectation
+cd ~/OpenHack/OpenHack-Microsoft/byos/containers/deploy
+#modify the deploy.sh script with Ubuntu2204 image
+#declare imagename="Ubuntu2204" to modify the Ubuntu distribution
+#az vm create -n internal-vm -g $teamRG --admin-username azureuser --generate-ssh-keys --public-ip-address "" --image $imagename --vnet-name vnet --subnet vm-subnet
+#westeu region has all the feature needed by the lab
+az account list-locations --output table | grep europe
+./deploy.sh -l "westus"
+
+#Environment variables
+random="ymi6049"
+teamRG="teamResources"
+proctorRG="proctorResources"
+vm="internal-vm"
+
+#Internal VM
+az vm stop --name $vm --resource-group $teamRG
+
+#SQL variables
+sqlfqdn=sqlserver$random.database.windows.net
+sqluser=sqladmin$random
+sqlpass=
+sqldb=mydrivingDB
+
+#Registry variables
+registryName="registry$random"
+registryLoginServer="registry$random.azurecr.io"
+registryPassword="$(az acr credential show -n $registryName -g $teamRG --query 'passwords[0].value' --output tsv)"
+
+#SQL variables (echo)
+echo sqlfqdn=$sqlfqdn;echo sqluser=$sqluser;echo sqlpass=$sqlpass;echo sqldb=$sqldb
+sqlfqdn=sqlserverymi6049.database.windows.net
+sqluser=sqladminymi6049
+sqlpass=
+sqldb=mydrivingDB
+
+#Registry variables (echo)
+echo registryName=$registryName;echo registryLoginServer=$registryLoginServer;echo registryPassword=$registryPassword
+registryName=registryymi6049
+registryLoginServer=registryymi6049.azurecr.io
+registryPassword=
+
 #Azure Container Registry
 https://learn.microsoft.com/en-us/azure/container-registry/container-registry-intro
 #ACR is a managed registry service based on the open-source Docker Registry 2.0. Create and maintain Azure container registries to store and manage your container images and related artifacts.
@@ -28,28 +80,4 @@ az container show -n $simulatorName -g $teamRG
 #SQL server
 #Add yourpublic IP to SQL server Network
 #use Azure Query editor to query tables on mydrivingDB
-
-#Github : YeffaDev/openhack-mycontainer
-#Use this repo to download source code and configuration files
-git clone https://github.com/YeffaDev/OpenHack-MyContainer
-
-#Create new repo with your name "OpenHack-YourNameContainer"
-#Use this repo to create your own configuration files
-https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup
-#Configure github credential
-sudo git config --system --unset credential.helper
-git config --global user.name "YeffaDev"
-git config --global user.email "paoloceffa@hotmail.com"
-#Create a new repo in the github portal console
-#Create local repo
-cd ~/Openhack
-mkdir OpenHack-YourNameContainer
-echo "# OpenHack-YourNameContainerLab" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-#Sync remote repo
-git remote add origin https://github.com/YeffaDev/OpenHack-YourContainer.git
-git push -u origin main
 
