@@ -1,5 +1,5 @@
 #Github : OpenHack Microsoft
-#Use "byos/containers/deploy/deploy.sh" to deploy the lab
+#Use "byos/containers/deploy/deploy.sh" to deploy the la
 https://github.com/microsoft/OpenHack
 https://github.com/microsoft/OpenHack/blob/main/byos/containers/deployment.md
 
