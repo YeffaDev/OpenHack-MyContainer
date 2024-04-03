@@ -1,0 +1,12 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx2-ingress-tripviewer
+  namespace: playground
+spec:
+  ingressClassName: nginx
+  defaultBackend:
+    service:
+      name: tripviewer-service2
+      port:
+        number: 80

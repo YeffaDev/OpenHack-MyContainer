@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userprofile
+  labels:
+    app: userprofile
+spec:
+  selector:
+    matchLabels:
+      app: userprofile
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: userprofile
+    spec:
+      containers:
+      - image: "registryymi6049.azurecr.io/paoloceffa/userprofile:1.0"
+        name: userprofile
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources:
+          limits:
+            cpu: "0.2"
+            memory: "256Mi"
+          requests:
+            cpu: "0.2"
+            memory: "256Mi"
+        envFrom:
+        - secretRef:
+            name: sql
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: userprofile-service
+spec:
+  selector:
+    app: userprofile
+  ports:
+  - name: userprofile-http
+    protocol: TCP
+    port: 80
+    targetPort: 80

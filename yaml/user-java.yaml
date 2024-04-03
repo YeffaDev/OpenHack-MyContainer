@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-java
+  labels:
+    app: user-java
+spec:
+  selector:
+    matchLabels:
+      app: user-java
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: user-java
+    spec:
+      containers:
+      - image: "registryymi6049.azurecr.io/paoloceffa/user-java:1.0"
+        name: user-java
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources:
+          limits:
+            cpu: "0.2"
+            memory: "256Mi"
+          requests:
+            cpu: "0.2"
+            memory: "256Mi"
+        envFrom:
+        - secretRef:
+            name: sql
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-java-service
+spec:
+  selector:
+    app: user-java
+  ports:
+  - name: user-java-http
+    protocol: TCP
+    port: 80
+    targetPort: 80

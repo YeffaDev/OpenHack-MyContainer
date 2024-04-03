@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trips
+  labels:
+    deploy: trips
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trips
+  template:
+    metadata:
+      labels:
+        app: trips
+    spec:
+      containers:
+      - image: "registryymi6049.azurecr.io/paoloceffa/trips:1.0"
+        imagePullPolicy: Always
+        name: trips
+        livenessProbe:
+          httpGet:
+            path: /api/trips/healthcheck
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /api/trips/healthcheck
+            port: 80
+          initialDelaySeconds: 5
+        ports:
+          - containerPort: 80
+            name: http
+            protocol: TCP
+          - containerPort: 443
+            name: https
+            protocol: TCP
+        resources:
+          limits:
+            cpu: "0.15"
+            memory: "128Mi"
+          requests:
+            cpu: "0.15"
+            memory: "128Mi"
+        env:
+          - name: PORT
+            value: '80'
+          - name: OPENAPI_DOCS_URI
+            value: 'http://localhost'
+          - name: DEBUG_LOGGING
+            value: 'true'
+        envFrom:
+        - secretRef:
+            name: sql
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: trips-service
+spec:
+  selector:
+    app: trips
+  ports:
+    - name: trips-http
+      protocol: TCP
+      port: 80
+      targetPort: 80

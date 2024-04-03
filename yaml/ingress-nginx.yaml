@@ -1,0 +1,67 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress-tripviewer
+spec:
+  ingressClassName: nginx
+  defaultBackend:
+    service:
+      name: tripviewer-service
+      port:
+        number: 80
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Exact
+        backend:
+          service:
+            name: tripviewer-service
+            port:
+              number: 80
+  - http:
+      paths:
+      - path: /Trip
+        pathType: Exact
+        backend:
+          service:
+            name: tripviewer-service
+            port:
+              number: 80
+  - http:
+      paths:
+      - path: /UserProfile
+        pathType: Exact
+        backend:
+          service:
+            name: tripviewer-service
+            port:
+              number: 80
+      - path: /api/user-java
+        pathType: Prefix
+        backend:
+          service:
+            name: user-java-service
+            port:
+              number: 80
+      - path: /api/user
+        pathType: Prefix
+        backend:
+          service:
+            name: userprofile-service
+            port:
+              number: 80     
+      - path: /api/trips
+        pathType: Prefix
+        backend:
+          service:
+            name: trips-service
+            port:
+              number: 80
+      - path: /api/poi
+        pathType: Prefix
+        backend:
+          service:
+            name: poi-service
+            port:
+              number: 80
