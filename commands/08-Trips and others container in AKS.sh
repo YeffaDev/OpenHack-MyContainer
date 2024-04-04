@@ -42,5 +42,5 @@ curl -i -X GET 'http://tripviewer-service:80'
 curl http://trips-service:80/api/trips
 curl http://poi-service:80/api/poi
 curl http://userprofile-service:80/api/user
-curl -i -X PATCH --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{ "fuelConsumption":90, "hardStops":74371 }' 'http://user-java-service:80/api/user-java/aa1d876a-3e37-4a7a-8c9b-769ee6217ec1'
+curl -i -X PATCH --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{ "fuelConsumption":91, "hardStops":74371 }' 'http://user-java-service:80/api/user-java/aa1d876a-3e37-4a7a-8c9b-769ee6217ec1'
 exit

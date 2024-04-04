@@ -15,7 +15,7 @@ spec:
         app: trips
     spec:
       containers:
-      - image: "registryymi6049.azurecr.io/paoloceffa/trips:1.0"
+      - image: "registryyad4447.azurecr.io/paoloceffa/trips:1.0"
         imagePullPolicy: Always
         name: trips
         livenessProbe:

@@ -5,7 +5,7 @@ az aks create \
   --enable-managed-identity \
   --node-count 2 \
   --generate-ssh-keys \
-  --attach-acr $registryLoginServer
+  --attach-acr $registryName
 
 #Attach/detach registry
 az aks update -n akscluster$random -g $teamRG --attach-acr $registryName
@@ -35,14 +35,16 @@ kubectl edit secrets sql-cred
 
 #Massive application deploy (otherwise follow all the detailed step below)
 cd  ~/OpenHack/OpenHack-MyContainer/yaml
-kubectl apply -f secret.yaml #(remember to update the password)
+#(remember to update the password and sqlserver info)
+kubectl apply -f secret.yaml
+#(remember to update the registry)
 kubectl apply -f poi.yaml
 kubectl apply -f user-java.yaml
 kubectl apply -f userprofile.yaml
 kubectl apply -f trips.yaml
 kubectl apply -f tripviewer.yaml
 
-#Secret yaml (remember to update the password)
+#(remember to update the password and sqlserver info)
 apiVersion: v1
 kind: Secret
 metadata:

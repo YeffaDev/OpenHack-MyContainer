@@ -42,7 +42,7 @@ sudo docker tag docker.io/tripinsights/poi:1.0 $registryLoginServer/paoloceffa/p
 sudo docker push $registryLoginServer/paoloceffa/poi:1.0
 #Push to the repository the "latest" version
 sudo docker push $registryLoginServer/paoloceffa/poi
-#Show repositories in regiistry
+#Show repositories in registry
 az acr repository list --name $registryName --output table
 az acr repository show --name $registryName --repository paoloceffa/poi --output table
 az acr repository show-tags --name $registryName --repository paoloceffa/poi --output table

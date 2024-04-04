@@ -13,8 +13,8 @@ cd ~/OpenHack/OpenHack-Microsoft/byos/containers/deploy
 #modify the deploy.sh script with Ubuntu2204 image
 #declare imagename="Ubuntu2204" to modify the Ubuntu distribution
 #az vm create -n internal-vm -g $teamRG --admin-username azureuser --generate-ssh-keys --public-ip-address "" --image $imagename --vnet-name vnet --subnet vm-subnet
-#westeu region has all the feature needed by the lab
-az account list-locations --output table | grep europe
+#westus region has all the feature needed by the lab
+#az account list-locations --output table | grep europe
 ./deploy.sh -l "westus"
 
 #SQL server
@@ -22,7 +22,7 @@ az account list-locations --output table | grep europe
 #use Azure Query editor to query tables on mydrivingDB
 
 #Set Environment Variables from script output
-random="ymi6049"
+random="yad4447"
 teamRG="teamResources"
 proctorRG="proctorResources"
 vm="internal-vm"
@@ -43,17 +43,6 @@ registryName="registry$random"
 registryLoginServer="registry$random.azurecr.io"
 registryPassword="$(az acr credential show -n $registryName -g $teamRG --query 'passwords[0].value' --output tsv)"
 echo registryName=$registryName;echo registryLoginServer=$registryLoginServer;echo registryPassword==$registryPassword
-
-#SQL variables (echo)
-sqlfqdn=sqlserverymi6049.database.windows.net
-sqluser=sqladminymi6049
-sqlpass=
-sqldb=mydrivingDB
-
-#Registry variables (echo)
-registryName=registryymi6049
-registryLoginServer=registryymi6049.azurecr.io
-registryPassword=
 
 #Azure Container Registry
 https://learn.microsoft.com/en-us/azure/container-registry/container-registry-intro

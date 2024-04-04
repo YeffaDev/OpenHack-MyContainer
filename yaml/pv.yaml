@@ -11,5 +11,5 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs:
-    server: aksmystymi6049.file.core.windows.net
-    path: /aksmystymi6049/export
+    server: aksmystyad4447.file.core.windows.net
+    path: /aksmystyad4447/export

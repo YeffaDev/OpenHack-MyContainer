@@ -9,6 +9,7 @@ kubectl get service ingress-nginx-controller --namespace=ingress-nginx
 
 #Create tripviewer ingress ,please wait for external address
 #(AKS/Services and Ingress/Ingresses)
+cd  ~/OpenHack/OpenHack-MyContainer/yaml
 kubectl apply -f ingress-nginx.yaml
 kubectl get ingress --watch
 kubectl describe ingress nginx-ingress-tripviewer
@@ -19,15 +20,17 @@ echo $INGRESSIP
 curl http://$INGRESSIP
 curl http://$INGRESSIP/UserProfile
 curl http://$INGRESSIP/Trip
-#ko
-curl http://$INGRESSIP/Trip/
 #ok
 curl http://$INGRESSIP/api/trips/healthcheck
 curl http://$INGRESSIP/api/poi/healthcheck
 curl http://$INGRESSIP/api/user-java/healthcheck
-curl http://$INGRESSIP/api/user
 #ok
 curl http://$INGRESSIP/api/user/
+curl http://$INGRESSIP/api/user
+curl http://$INGRESSIP/api/trips
+#ko
+curl http://$INGRESSIP/api/trips/
+
 
 #CleanUp deploy
 kubectl delete -f ingress-nginx.yaml

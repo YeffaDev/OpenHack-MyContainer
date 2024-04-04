@@ -16,7 +16,7 @@ spec:
         app: tripviewer
     spec:
       containers:
-      - image: "registryymi6049.azurecr.io/paoloceffa/tripviewer:1.0"
+      - image: "registryyad4447.azurecr.io/paoloceffa/tripviewer:1.0"
         name: tripviewer2
         ports:
         - containerPort: 80

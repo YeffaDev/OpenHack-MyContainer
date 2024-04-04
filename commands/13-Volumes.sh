@@ -4,6 +4,8 @@ az aks show --resource-group $teamRG --name akscluster$random --query '[powerSta
 #if not already done
 kubectl config get-contexts
 kubectl config use-context akscluster$random
+#if needed
+kubectl config delete-context aksclusterymi6049
 
 #Connect to AKS cluster
 az aks get-credentials -g teamResources -n akscluster$random
@@ -43,7 +45,7 @@ touch test2.txt
 ls
 exit
 
-#Terminateand create POD
+#Terminate and re-create POD
 kubectl delete -f nfs-nginx.yaml
 kubectl apply -f nfs-nginx.yaml
 pod=$(kubectl -n playground get pods -o json | jq -r '.items[] | select(.metadata.name | test("nginx-nfs")).metadata.name')

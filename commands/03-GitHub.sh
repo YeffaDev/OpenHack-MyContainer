@@ -1,4 +1,4 @@
-#Use this repo to download source code and configuration files
+#Use this repo to download source code and configuration files already set
 git clone https://github.com/YeffaDev/OpenHack-MyContainer
 
 #Configure git account

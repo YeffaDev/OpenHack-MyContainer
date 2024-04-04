@@ -13,7 +13,7 @@ spec:
         app: poi
     spec:
       containers:
-      - image: "registryymi6049.azurecr.io/paoloceffa/poi:1.0"
+      - image: "registryyad4447.azurecr.io/paoloceffa/poi:1.0"
         name: poi
         ports:
         - containerPort: 80

@@ -15,7 +15,7 @@ spec:
         app: userprofile
     spec:
       containers:
-      - image: "registryymi6049.azurecr.io/paoloceffa/userprofile:1.0"
+      - image: "registryyad4447.azurecr.io/paoloceffa/userprofile:1.0"
         name: userprofile
         ports:
         - containerPort: 80
